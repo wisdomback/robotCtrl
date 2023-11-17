@@ -1,0 +1,8 @@
+<launch>
+  <node pkg="map_server" name="map_server" type="map_server" args="$(find navmap)/map/map.yaml"/> <!--지도 설정 불러오기-->
+  <include file="$(find track)/launch/amcl.launch"/>
+  <include file="$(find track)/launch/move.launch"/> <!--launch 파일들 불러오기-->
+  <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find botgaze)/urdf/bot.urdf'"/> <!--rviz내 로봇 불러들이기-->
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher"/> <!--각 조인트를 tf로 퍼블리싱-->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find track)/launch/track.rviz"/> <!--rviz 파일 실행-->
+</launch>

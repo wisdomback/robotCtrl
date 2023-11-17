@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<launch>
+    <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find botgaze)/urdf/bot.urdf'"/>
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher"/>
+
+    <node pkg="gmapping" type="slam_gmapping" name="navmap" output="screen">
+        <param name="base_frame" value="base"/>
+        <param name="odom_frame" value="odom"/>
+        <param name="map_frame"  value="map"/>
+        <rosparam command="load" file="$(find navmap)/config/gmapping.yaml" />
+    </node>
+    
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find navmap)/launch/floor_gmap.rviz"/>
+</launch>

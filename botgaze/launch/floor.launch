@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<launch>
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find botgaze)/worlds/floor.world"/>
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+    <arg name="headless" value="false"/>
+    <arg name="recording" value="false"/>
+    <arg name="debug" value="false"/>
+  </include>
+  
+  <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find botgaze)/urdf/bot.urdf'" />
+  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -x -4 -z 1 -model bot -param robot_description"/>
+  
+  <rosparam file="$(find botgaze)/control.yaml" command="load"/>
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" args="ctl pos0 pos1 pos2 pos3"/>
+  <node pkg="robot_state_publisher" name="robot_state_publisher" type="robot_state_publisher"/>
+</launch>

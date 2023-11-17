@@ -1,0 +1,291 @@
+<?xml version='1.0'?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="bot">
+
+  <material name="black"><color rgba="0.0 0.0 0.0 1.0"/></material>
+  <material name="white"><color rgba="1.0 1.0 1.0 1.0"/></material>
+  <material name="red"><color rgba="1.0 0.0 0.0 1.0"/></material>
+  <material name="green"><color rgba="0.0 1.0 0.0 1.0"/></material>
+
+  <link name='base'>
+    <visual>
+      <geometry><box size="0.05 0.2 0.02"/></geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.1"/>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <geometry><box size="0.05 0.2 0.02"/></geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.1"/>
+    </collision>
+    <inertial>
+      <mass value="10"/>
+      <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/>
+    </inertial>
+  </link>
+
+  <link name='caster1'>
+    <visual>
+      <geometry><sphere radius="0.05"/></geometry>
+      <origin rpy="1.57 0 0" xyz="0 0 0"/>
+      <material name="black"/>
+    </visual>
+    <collision>
+      <geometry><sphere radius="0.05"/></geometry>
+      <origin rpy="1.57 0 0" xyz="0 0 0"/>
+    </collision>
+    <inertial>
+      <mass value="10"/>
+      <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/>"/>
+    </inertial>
+  </link>
+
+  <link name='caster2'>
+    <visual>
+      <geometry><sphere radius="0.05"/></geometry>
+      <origin rpy="1.57 0 0" xyz="0 0 0"/>
+      <material name="black"/>
+    </visual>
+    <collision>
+      <geometry><sphere radius="0.05"/></geometry>
+      <origin rpy="1.57 0 0" xyz="0 0 0"/>
+    </collision>
+    <inertial>
+      <mass value="10"/>
+      <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/>
+    </inertial>
+  </link>  
+
+  <link name='left'>
+    <visual>
+      <geometry><cylinder length="0.05" radius="0.1"/></geometry>
+      <origin rpy="1.57 0 0" xyz="0 0 0"/>
+      <material name="black"/>
+    </visual>
+    <collision>
+      <geometry><cylinder length="0.05" radius="0.1"/></geometry>
+      <origin rpy="1.57 0 0" xyz="0 0 0"/>
+    </collision>
+    <inertial>
+      <mass value="10"/>
+      <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/>
+    </inertial>
+  </link>
+
+  <link name='right'>
+    <visual>
+      <geometry><cylinder length="0.05" radius="0.1"/></geometry>
+      <origin rpy="1.57 0 0" xyz="0 0 0"/>
+      <material name="black"/>
+    </visual>
+    <collision>
+      <geometry><cylinder length="0.05" radius="0.1"/></geometry>
+      <origin rpy="1.57 0 0" xyz="0 0 0"/>
+    </collision>
+    <inertial>
+      <mass value="10"/>
+      <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/>
+    </inertial>
+  </link>  
+
+  <link name="scan">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><box size="0.1 0.1 0.1"/></geometry>
+      <material name="red"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><box size="0.1 0.1 0.1"/></geometry>
+    </collision>
+    <inertial>
+      <mass value="0.114"/>
+      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+    </inertial>
+  </link>
+
+  <link name="camera_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><box size="0.05 0.05 0.05"/></geometry>
+      <material name="green"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><box size="0.05 0.05 0.05"/></geometry>
+    </collision>
+    <inertial>
+      <mass value="0.114"/>
+      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+    </inertial>  
+  </link>
+
+  <joint name='JOINT_0' type='continuous'>
+    <parent link="base"/>
+    <child link="right"/>
+    <origin rpy="0 0 0" xyz="0.0 -0.2 0.1"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="30" lower="-2.617" upper="2.617" velocity="3.14"/>
+  </joint>
+
+  <joint name='JOINT_1' type='continuous'>
+    <parent link="base"/>
+    <child link="left"/>
+    <origin rpy="0 0 0" xyz="0.0 0.2 0.1"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="30" lower="-2.617" upper="2.617" velocity="3.14"/>
+  </joint>
+
+  <joint name='JOINT_2' type='continuous'>
+    <parent link="base"/>
+    <child link="caster1"/>
+    <origin rpy="0 0 0" xyz="0.2 0 0.05"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="30" lower="-2.617" upper="2.617" velocity="3.14"/>
+  </joint>
+
+  <joint name='JOINT_3' type='continuous'>
+    <parent link="base"/>
+    <child link="caster2"/>
+    <origin rpy="0 0 0" xyz="-0.2 0 0.05"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="30" lower="-2.617" upper="2.617" velocity="3.14"/>
+  </joint>
+
+  <joint name='JOINT_SCAN' type='fixed'>
+    <origin rpy="0 0 0" xyz="0 0 0.25"/>
+    <parent link="base"/>
+    <child link="scan"/>
+  </joint>
+
+  <joint name='JOINT_CAM' type='fixed'>
+    <origin rpy="0 0 0" xyz="0.1 0 0.15"/>
+    <axis xyz="0 0 0"/>
+    <parent link="base"/>
+    <child link="camera_link"/>
+  </joint>
+
+  <gazebo>
+    <gravity>true</gravity>
+    <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
+      <!-- <robotNamespace>/bot</robotNamespace> -->
+      <updateRate>100.0</updateRate>
+      <leftJoint>JOINT_1</leftJoint>
+      <rightJoint>JOINT_0</rightJoint>
+      <wheelSeparation>0.2</wheelSeparation>
+      <wheelDiameter>0.4</wheelDiameter>
+      <robotBaseFrame>base</robotBaseFrame>
+      <wheelAcceleration>2.0</wheelAcceleration>
+      <wheelTorque>20</wheelTorque>
+      <commandTopic>cmd_vel</commandTopic>
+      <odometryTopic>odom</odometryTopic>
+      <odometryFrame>odom</odometryFrame>
+      <odometrySource>world</odometrySource>
+      <publishWheelTF>true</publishWheelTF>
+      <publishOdomTF>true</publishOdomTF>
+      <publishWheelJointState>true</publishWheelJointState>
+      <!-- <rosDebugLevel>Debug</rosDebugLevel> -->
+    </plugin>
+    <plugin name="joint_state_publisher" filename="libgazebo_ros_joint_state_publisher.so">
+      <jointName>JOINT_2,JOINT_3</jointName>
+    </plugin>
+  </gazebo>
+
+  <gazebo reference="caster1">
+    <gravity>true</gravity>
+    <material>Gazebo/Blue</material>
+  </gazebo>
+  <gazebo reference="caster2">
+    <gravity>true</gravity>
+    <material>Gazebo/Blue</material>
+  </gazebo>
+  <gazebo reference="left">
+    <gravity>true</gravity>
+    <material>Gazebo/Blue</material>
+  </gazebo>
+  <gazebo reference="right">
+    <gravity>true</gravity>
+    <material>Gazebo/Blue</material>
+  </gazebo>
+  <gazebo reference="scan">
+    <material>Gazebo/Red</material>
+    <sensor type="ray" name="lds_lfcd_sensor">
+      <pose>0 0 0 0 0 0</pose>
+      <visualize>false</visualize>
+      <update_rate>5</update_rate>
+      <ray>
+        <scan>
+          <horizontal>
+            <samples>360</samples>
+            <resolution>1</resolution>
+            <min_angle>0.0</min_angle>
+            <max_angle>6.28319</max_angle>
+          </horizontal>
+        </scan>
+        <range>
+          <min>0.120</min>
+          <max>3.5</max>
+          <resolution>0.015</resolution>
+        </range>
+        <noise>
+          <type>gaussian</type>
+          <mean>0.0</mean>
+          <stddev>0.01</stddev>
+        </noise>
+      </ray>
+      <plugin name="gazebo_ros_lds_lfcd_controller" filename="libgazebo_ros_laser.so">
+        <topicName>scan</topicName>
+        <frameName>scan</frameName>
+      </plugin>
+    </sensor>
+  </gazebo>
+  <gazebo reference="camera_link">
+    <sensor type="camera" name="camera_camera_sensor">
+      <update_rate>30.0</update_rate>
+      <camera>
+        <pose>0.035 0 0.078 0 0 0</pose>
+        <horizontal_fov>1.48</horizontal_fov>
+        <image>
+          <format>R8G8B8</format>
+          <width>1920</width>
+          <height>1080</height>
+        </image>
+        <clip>
+          <near>0.01</near>
+          <far>100</far>
+        </clip>
+      </camera>
+
+      <plugin name="camera_camera_controller" filename="libgazebo_ros_camera.so">
+        <alwaysOn>true</alwaysOn>
+        <updateRate>0.0</updateRate>
+        <cameraName>arm_sensor/camera</cameraName>
+        <imageTopicName>image_raw</imageTopicName>
+        <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+        <frameName>camera_link</frameName>
+        <hackBaseline>0.07</hackBaseline>
+        <distortionK1>0.0</distortionK1>
+        <distortionK2>0.0</distortionK2>
+        <distortionK3>0.0</distortionK3>
+        <distortionT1>0.0</distortionT1>
+        <distortionT2>0.0</distortionT2>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+  <xacro:macro name="trans" params="joint_name idx">
+    <transmission name="tran_${idx}">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${joint_name}">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="motor__${idx}">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+  </xacro:macro>
+
+  <xacro:trans joint_name="JOINT_0" idx="1"/>
+  <xacro:trans joint_name="JOINT_1" idx="2"/>
+  <xacro:trans joint_name="JOINT_2" idx="3"/>
+  <xacro:trans joint_name="JOINT_3" idx="4"/>
+</robot>
